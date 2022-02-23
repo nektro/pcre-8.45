@@ -1,0 +1,8 @@
+.deps
+*.pc
+Makefile
+libtool
+config.log
+config.status
+stamp-h1
+pcre-config
