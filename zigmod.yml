@@ -1,0 +1,33 @@
+id: 8z7q0m81vvex2hf2d9cjhx7s0xl8igd6b4b1t9fh3kfor1rc
+name: pcre-8.45
+license: BSD-3-Clause
+description: Perl Compatible Regular Expressions
+c_include_dirs:
+  -
+c_source_flags:
+  - -Wno-implicit-function-declaration
+  - -DHAVE_CONFIG_H
+c_source_files:
+  - pcre_byte_order.c
+  - pcre_chartables.c
+  - pcre_compile.c
+  - pcre_config.c
+  - pcre_dfa_exec.c
+  - pcre_exec.c
+  - pcre_fullinfo.c
+  - pcre_get.c
+  - pcre_globals.c
+  - pcre_jit_compile.c
+  - pcre_maketables.c
+  - pcre_newline.c
+  - pcre_ord2utf8.c
+  - pcreposix.c
+  - pcre_printint.c
+  - pcre_refcount.c
+  - pcre_string_utils.c
+  - pcre_study.c
+  - pcre_tables.c
+  - pcre_ucd.c
+  - pcre_valid_utf8.c
+  - pcre_version.c
+  - pcre_xclass.c
