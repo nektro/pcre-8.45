@@ -6,3 +6,11 @@ config.log
 config.status
 stamp-h1
 pcre-config
+.libs
+*.o
+*.lo
+*.la
+*_unittest
+pcregrep
+pcretest
+dftables
