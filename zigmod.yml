@@ -21,7 +21,6 @@ c_source_files:
   - pcre_maketables.c
   - pcre_newline.c
   - pcre_ord2utf8.c
-  - pcreposix.c
   - pcre_printint.c
   - pcre_refcount.c
   - pcre_string_utils.c
