@@ -56,7 +56,7 @@ asked to print out a compiled regex for debugging purposes. */
 #endif
 
 /* For pcretest program. */
-#define PRIV(name) name
+//#define PRIV(name) name
 
 /* We have to include pcre_internal.h because we need the internal info for
 displaying the results of pcre_study() and we also need to know about the
