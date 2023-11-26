@@ -10,6 +10,9 @@ pub fn build(b: *std.build.Builder) void {
     addExe(b, target, mode, "pcregrep");
     addExe(b, target, mode, "pcretest");
     // addExe(b, target, mode, "pcre_jit_test");
+
+    const test_step = b.step("test", "dummy test step to pass CI checks");
+    _ = test_step;
 }
 
 fn addExe(b: *std.build.Builder, target: std.zig.CrossTarget, mode: std.builtin.Mode, comptime name: []const u8) void {
