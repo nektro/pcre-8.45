@@ -3,7 +3,7 @@ const deps = @import("./deps.zig");
 
 pub fn build(b: *std.build.Builder) void {
     const target = b.standardTargetOptions(.{});
-    const mode = b.standardReleaseOptions();
+    const mode = b.option(std.builtin.Mode, "mode", "") orelse .Debug;
 
     addExe(b, target, mode, "dftables");
     addExe(b, target, mode, "pcredemo");
@@ -13,10 +13,17 @@ pub fn build(b: *std.build.Builder) void {
 }
 
 fn addExe(b: *std.build.Builder, target: std.zig.CrossTarget, mode: std.builtin.Mode, comptime name: []const u8) void {
-    const exe = b.addExecutable(name, null);
-    exe.setTarget(target);
-    exe.setBuildMode(mode);
+    const exe = b.addExecutable(.{
+        .name = name,
+        .target = target,
+        .optimize = mode,
+    });
     deps.addAllTo(exe);
-    exe.addCSourceFile(name ++ ".c", &.{});
-    exe.install();
+    exe.addCSourceFile(.{
+        .file = .{ .path = name ++ ".c" },
+        .flags = &.{
+            "-DHAVE_CONFIG_H",
+        },
+    });
+    b.installArtifact(exe);
 }
