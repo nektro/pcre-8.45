@@ -13,7 +13,7 @@ pub fn build(b: *std.Build) void {
     });
     lib.addIncludePath(.{ .path = b.pathFromRoot(".") });
     lib.addIncludePath(copyFiles.getDirectory());
-    lib.addIncludePath(std.Build.LazyPath{ .cwd_relative = "/usr/include" }); // temporary hack
+    lib.linkLibC();
     lib.installHeader(b.path("pcre.h"), "pcre.h");
 
     lib.addCSourceFiles(.{
