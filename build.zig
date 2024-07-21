@@ -1,32 +1,46 @@
 const std = @import("std");
-const deps = @import("./deps.zig");
 
-pub fn build(b: *std.build.Builder) void {
+pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
-    const mode = b.option(std.builtin.Mode, "mode", "") orelse .Debug;
-
-    addExe(b, target, mode, "dftables");
-    addExe(b, target, mode, "pcredemo");
-    addExe(b, target, mode, "pcregrep");
-    addExe(b, target, mode, "pcretest");
-    // addExe(b, target, mode, "pcre_jit_test");
-
-    const test_step = b.step("test", "dummy test step to pass CI checks");
-    _ = test_step;
-}
-
-fn addExe(b: *std.build.Builder, target: std.zig.CrossTarget, mode: std.builtin.Mode, comptime name: []const u8) void {
-    const exe = b.addExecutable(.{
-        .name = name,
+    const optimize = b.standardOptimizeOption(.{});
+    const lib = b.addStaticLibrary(.{
+        .name = b.fmt("pcre", .{}),
         .target = target,
-        .optimize = mode,
+        .optimize = optimize,
     });
-    deps.addAllTo(exe);
-    exe.addCSourceFile(.{
-        .file = .{ .path = name ++ ".c" },
-        .flags = &.{
+    lib.addIncludePath(b.path("."));
+    lib.linkLibC();
+    lib.installHeader(b.path("pcre.h"), "pcre.h");
+
+    lib.addCSourceFiles(.{
+        .flags = &[_][]const u8{
+            "-Wno-implicit-function-declaration",
             "-DHAVE_CONFIG_H",
         },
+        .files = &[_][]const u8{
+            "pcre_byte_order.c",
+            "pcre_chartables.c",
+            "pcre_compile.c",
+            "pcre_config.c",
+            "pcre_dfa_exec.c",
+            "pcre_exec.c",
+            "pcre_fullinfo.c",
+            "pcre_get.c",
+            "pcre_globals.c",
+            "pcre_jit_compile.c",
+            "pcre_maketables.c",
+            "pcre_newline.c",
+            "pcre_ord2utf8.c",
+            "pcre_printint.c",
+            "pcre_refcount.c",
+            "pcre_string_utils.c",
+            "pcre_study.c",
+            "pcre_tables.c",
+            "pcre_ucd.c",
+            "pcre_valid_utf8.c",
+            "pcre_version.c",
+            "pcre_xclass.c",
+        },
     });
-    b.installArtifact(exe);
+    b.installArtifact(lib);
 }
