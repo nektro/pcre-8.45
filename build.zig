@@ -3,16 +3,12 @@ const std = @import("std");
 pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
-    const copyFiles = b.addWriteFiles();
-    _ = copyFiles.addCopyFile(.{ .path = "config.h.generic" }, "config.h");
-    _ = copyFiles.addCopyFile(.{ .path = "pcre.h.generic" }, "pcre.h");
     const lib = b.addStaticLibrary(.{
         .name = b.fmt("pcre", .{}),
         .target = target,
         .optimize = optimize,
     });
-    lib.addIncludePath(.{ .path = b.pathFromRoot(".") });
-    lib.addIncludePath(copyFiles.getDirectory());
+    lib.addIncludePath(b.path("."));
     lib.linkLibC();
     lib.installHeader(b.path("pcre.h"), "pcre.h");
 
