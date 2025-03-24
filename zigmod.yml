@@ -5,7 +5,6 @@ description: Perl Compatible Regular Expressions
 c_include_dirs:
   -
 c_source_flags:
-  - -Wno-implicit-function-declaration
   - -DHAVE_CONFIG_H
 c_source_files:
   - pcre_byte_order.c
@@ -21,7 +20,6 @@ c_source_files:
   - pcre_maketables.c
   - pcre_newline.c
   - pcre_ord2utf8.c
-  - pcre_printint.c
   - pcre_refcount.c
   - pcre_string_utils.c
   - pcre_study.c
