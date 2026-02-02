@@ -1,7 +1,8 @@
 .{
-    .name = "pcre",
+    .name = .pcre,
     .version = "8.45.0",
-    .minimum_zig_version = "0.12.0",
+    .minimum_zig_version = "0.15.1",
+    .fingerprint = 0x203b845a0181341d,
 
     .dependencies = .{},
 

@@ -18,3 +18,4 @@ dftables
 deps.zig
 zig-*
 zigmod.lock
+.zig-cache
