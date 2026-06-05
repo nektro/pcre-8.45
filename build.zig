@@ -12,7 +12,7 @@ pub fn build(b: *std.Build) void {
         }),
     });
     lib.addIncludePath(b.path("."));
-    lib.linkLibC();
+    lib.root_module.link_libc = true;
     lib.installHeader(b.path("pcre.h"), "pcre.h");
 
     lib.addCSourceFiles(.{
